@@ -1,0 +1,17 @@
+<h1>Herbs</h1>
+<div id="herb-list" class="row">
+    <!--<div class="col-sm-4 col-sm-offset-4">-->
+        <!-- LOOP OVER THE HERBS IN $scope.herbs -->
+        <!--<div ng-repeat="herb in herbs">-->
+            <!--{{ herb.englishName }}-->
+        <!--</div>-->
+    <!--</div>-->
+    <div>
+        <table ng-table class="table">
+            <tr ng-repeat="herb in herbs">
+                <td data-title="'ABC'">{{herb.englishName}}</td>
+                <td data-title="'EEE'">{{herb.chineesehName}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
