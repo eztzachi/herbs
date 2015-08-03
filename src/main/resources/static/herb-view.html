@@ -1,0 +1,42 @@
+<!--<h3>Details for {{herb.englishName}}</h3>-->
+<!--<img class="media-object img-rounded" data-ng-src="{{herb.image}}">-->
+<!--<table ng-table class="table">-->
+    <!--<tr ng-repeat="(key, value) in herb">-->
+        <!--<td data-title="'Property'">{{key}} : {{value}}</td>-->
+        <!--&lt;!&ndash;<td data-title="'Value'">{{value}}</td>&ndash;&gt;-->
+    <!--</tr>-->
+<!--</table>-->
+
+<!--<div>-->
+    <!--<a class="btn btn-primary" ui-sref="editHerb({id:herb.id})">Edit</a>-->
+<!--</div>-->
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="media">
+            <div class="pull-left">
+                <img class="media-object img-rounded" data-ng-src="{{herb.image}}">
+            </div>
+            <div class="media-body">
+                <h2 class="media-heading">
+                    {{herb.englishName}}
+                </h2>
+                <table ng-table="tableParams" class="table">
+                    <tr ng-repeat="(key, value) in herb">
+                        <td data-title="'Property'">{{key}} : {{value}}</td>
+                        <!--<td data-title="'Value'">{{value}}</td>-->
+                    </tr>
+                </table>
+                <!--<h4 ng-show="show.status === 'Continuing'">-->
+                    <!--<span class="glyphicon glyphicon-calendar text-danger"></span>-->
+                    <!--{{show.airsDayOfWeek}} <em>{{show.airsTime}}</em> on-->
+                    <!--{{show.network}}-->
+                <!--</h4>-->
+                <!--<h4 ng-show="show.status === 'Ended'">-->
+                    <!--Status: <span class="text-danger">Ended</span>-->
+                <!--</h4>-->
+                <!--<p>{{show.overview}}</p>-->
+            </div>
+        </div>
+    </div>
+</div>

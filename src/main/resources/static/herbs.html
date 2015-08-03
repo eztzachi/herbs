@@ -9,8 +9,11 @@
     <div>
         <table ng-table class="table">
             <tr ng-repeat="herb in herbs">
-                <td data-title="'ABC'">{{herb.englishName}}</td>
-                <td data-title="'EEE'">{{herb.chineesehName}}</td>
+                <td data-title="'English Name'">{{herb.englishName}}</td>
+                <td data-title="'Chinese Name'">{{herb.chineesehName}}</td>
+                <td>
+                    <a class="btn btn-primary" ui-sref="viewHerb({id:herb.id})">View</a>
+                </td>
             </tr>
         </table>
     </div>

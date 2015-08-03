@@ -1,24 +1,38 @@
-angular.module('hello', ['ngRoute','ngTable','ngResource']).config(function($routeProvider, $httpProvider) {
-
-	$routeProvider.when('/', {
+angular.module('hello', ['ngRoute','ngTable','ngResource', 'ui.router', 'herbApp.services'])
+.config(function($stateProvider,$urlRouterProvider, $httpProvider) {
+	$urlRouterProvider.otherwise('/');
+	$stateProvider.state('home', {
+		url : '/',
 		templateUrl : 'home.html',
 		controller : 'home'
-	}).when('/login', {
+	}).state('login', {
+		url : '/login',
 		templateUrl : 'login.html',
 		controller : 'navigation'
-	}).when('/herbs', {
+	}).state('herbs', {
+		url : '/herbs',
 		templateUrl : 'herbs.html',
 		controller : 'herbs'
-	})
-	.otherwise('/');
+	}).state('viewHerb', { //state for showing single herb
+        url: '/herbs/:id/view',
+        templateUrl: 'herb-view.html',
+        controller: 'HerbViewController'
+    }).state('editHerb', { //state for updating a movie
+        url: '/herbs/:id/edit',
+        templateUrl: 'herb-edit.html',
+        controller: 'HerbEditController'
+    });
+;
 
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+}).run(function($state) {
+          $state.go('home'); //make a transition to movies state when app starts
 }).controller('navigation',
 		function($rootScope, $scope, $http, $location, $route) {
-			$scope.tab = function(route) {
-				return $route.current && route === $route.current.controller;
-			};
+//			$scope.tab = function(route) {
+//				return $route.current && route === $route.current.controller;
+//			};
 			var authenticate = function(credentials, callback) {
 				var headers = credentials ? {
 					authorization : "Basic "
@@ -83,4 +97,21 @@ angular.module('hello', ['ngRoute','ngTable','ngResource']).config(function($rou
             .error(function(data) {
                 console.log('Error: ' + data);
             });
+}).controller('HerbViewController', function($scope, $stateParams, Herb, ngTableParams) {
+       $scope.herb = Herb.get({ id: $stateParams.id }); //Get a single herb
+       $scope.tableParams = new ngTableParams({
+//           count: $scope.herb.length // hides pager
+       },{
+           counts: [] // hides page sizes
+       });
+}).controller('HerbEditController',function($scope,$state,$stateParams,Herb){
+      $scope.updateHerb=function(){
+          $scope.herb.$update(function(){
+              $state.go('herbs');
+          });
+      };
+      $scope.loadHerb=function(){
+          $scope.herb = Herb.get({id:$stateParams.id});
+      };
+      $scope.loadHerb();
 });
