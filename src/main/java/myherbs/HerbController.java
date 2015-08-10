@@ -1,5 +1,6 @@
-package demo;
+package myherbs;
 
+import myherbs.dao.Herb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,25 +10,32 @@ import java.util.List;
  * Created by tezra on 7/31/15.
  */
 @RestController
-//@RequestMapping("/herbs")
+@RequestMapping("/api/herbs")
 public class HerbController {
 
     @Autowired
     private HerbRepository repository;
 
-    @RequestMapping("/herbs/abc")
-    public List findItems() {
+    @RequestMapping(method = RequestMethod.GET)
+    public List herbList() {
         return repository.findAll();
     }
 
-    @RequestMapping(value = "/herbs/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Herb viewHerb(@PathVariable String id) {
         return repository.findOne(id);
     }
 
-    @RequestMapping(value = "/herbs/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public Herb editHerb(@RequestBody Herb updatedItem, @PathVariable String id) {
         updatedItem.setId(id);
         return repository.save(updatedItem);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public Herb addHerb(@RequestBody Herb herb) {
+        System.out.println("POST");
+        herb.setId(null);
+        return repository.save(herb);
     }
 }

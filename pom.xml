@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>herbs</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Herbs cards and Quizzes</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -51,6 +51,21 @@
 			<groupId>org.webjars</groupId>
 			<artifactId>ng-table</artifactId>
 			<version>0.3.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>angular-ui-router</artifactId>
+			<version>0.2.15</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>angularjs-dropdown-multiselect</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>lodash</artifactId>
+			<version>3.9.0</version>
 		</dependency>
 	</dependencies>
 
@@ -131,7 +146,7 @@
 					<dependency>
 						<groupId>org.webjars</groupId>
 						<artifactId>bootstrap</artifactId>
-						<version>3.2.0</version>
+						<version>3.3.2</version>
 					</dependency>
 				</dependencies>
 			</plugin>

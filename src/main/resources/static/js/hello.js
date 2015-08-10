@@ -1,5 +1,4 @@
-angular.module('hello', ['ngRoute','ngTable','ngResource', 'ui.router', 'herbApp.services'])
-.config(function($stateProvider,$urlRouterProvider, $httpProvider) {
+angular.module('hello', ['ngRoute','ngTable','ngResource', 'ui.router', 'angularjs-dropdown-multiselect' ,'herbApp.controllers', 'herbApp.services']).config(function($stateProvider,$urlRouterProvider, $httpProvider) {
 	$urlRouterProvider.otherwise('/');
 	$stateProvider.state('home', {
 		url : '/',
@@ -17,12 +16,15 @@ angular.module('hello', ['ngRoute','ngTable','ngResource', 'ui.router', 'herbApp
         url: '/herbs/:id/view',
         templateUrl: 'herb-view.html',
         controller: 'HerbViewController'
-    }).state('editHerb', { //state for updating a movie
+    }).state('editHerb', { //state for updating a herb
         url: '/herbs/:id/edit',
         templateUrl: 'herb-edit.html',
         controller: 'HerbEditController'
+    }).state('newHerb', { //state for adding a new herb
+          url: '/herbs/add',
+          templateUrl: 'herb-add.html',
+          controller: 'HerbCreateController'
     });
-;
 
 	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -42,7 +44,6 @@ angular.module('hello', ['ngRoute','ngTable','ngResource', 'ui.router', 'herbApp
 
 				$http.get('user', {headers : headers})
 				.success(function(data) {
-					console.log(data);
 					if (data.name) {
 						$rootScope.authenticated = true;
 					} else {
@@ -78,7 +79,6 @@ angular.module('hello', ['ngRoute','ngTable','ngResource', 'ui.router', 'herbApp
 					$rootScope.authenticated = false;
 					$location.path("/");
 				}).error(function(data) {
-					console.log(data);
 					console.log("Logout failed");
 					$rootScope.authenticated = false;
 				});
@@ -88,30 +88,4 @@ angular.module('hello', ['ngRoute','ngTable','ngResource', 'ui.router', 'herbApp
 	$http.get('/resource/').success(function(data) {
 		$scope.greeting = data;
 	})
-}).controller('herbs', function($scope, $http) {
-	$http.get('/herbs/abc')
-            .success(function(data) {
-                $scope.herbs = data;
-                console.log(data);
-            })
-            .error(function(data) {
-                console.log('Error: ' + data);
-            });
-}).controller('HerbViewController', function($scope, $stateParams, Herb, ngTableParams) {
-       $scope.herb = Herb.get({ id: $stateParams.id }); //Get a single herb
-       $scope.tableParams = new ngTableParams({
-//           count: $scope.herb.length // hides pager
-       },{
-           counts: [] // hides page sizes
-       });
-}).controller('HerbEditController',function($scope,$state,$stateParams,Herb){
-      $scope.updateHerb=function(){
-          $scope.herb.$update(function(){
-              $state.go('herbs');
-          });
-      };
-      $scope.loadHerb=function(){
-          $scope.herb = Herb.get({id:$stateParams.id});
-      };
-      $scope.loadHerb();
 });

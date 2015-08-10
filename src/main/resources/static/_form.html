@@ -1,7 +1,25 @@
 <div class="form-group">
     <label for="englishName" class="col-sm-2 control-label">English Name</label>
+
     <div class="col-sm-10">
-        <input type="text" ng-model="herb.englishName" class="form-control" id="englishName" placeholder="Herb Name Here"/>
+        <input type="text" ng-model="herb.englishName" class="form-control" id="englishName"
+               placeholder="Herb Name Here"/>
+    </div>
+</div>
+<div class="form-group">
+    <label for="category" class="col-sm-2 control-label">Category</label>
+
+    <div class="col-sm-10">
+        <select ng-model="herb.category" class="form-control" id="category"
+                ng-options="category.name for category in categories track by category.id">
+        </select>
+    </div>
+</div>
+<div class="form-group">
+    <label for="channel" class="col-sm-2 control-label">Channels</label>
+    <div class="col-sm-10">
+        <div ng-dropdown-multiselect="" options="channels" selected-model="herb.channels" id="channel"
+             extra-settings="channelsSettings" checkboxes="true"></div>
     </div>
 </div>
 <div class="form-group">

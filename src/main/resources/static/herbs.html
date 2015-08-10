@@ -8,13 +8,15 @@
     <!--</div>-->
     <div>
         <table ng-table class="table">
-            <tr ng-repeat="herb in herbs">
+            <tr ng-repeat="herb in herbs | orderBy:['category.name','englishName']">
                 <td data-title="'English Name'">{{herb.englishName}}</td>
-                <td data-title="'Chinese Name'">{{herb.chineesehName}}</td>
+                <td data-title="'Chinese Name'">{{herb.chineseName}}</td>
+                <td data-title="'Category Name'">{{herb.category.name}}</td>
                 <td>
                     <a class="btn btn-primary" ui-sref="viewHerb({id:herb.id})">View</a>
                 </td>
             </tr>
         </table>
+        <a ui-sref="newHerb" class="btn-primary btn-lg nodecoration">Add New Herb</a>
     </div>
 </div>

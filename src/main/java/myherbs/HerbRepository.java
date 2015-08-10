@@ -1,5 +1,6 @@
-package demo;
+package myherbs;
 
+import myherbs.dao.Herb;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
